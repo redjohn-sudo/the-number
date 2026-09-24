@@ -10,6 +10,21 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="scene" class="scene">
+  <div id="scene-image" class="scene-image">
+    <img src="img/bureau.jpg" alt="Un bureau plongé dans la nuit, un seul écran allumé.">
+    <button id="ecran-bureau" class="ecran-bureau" aria-label="S'asseoir devant l'ordinateur">
+      <span class="ecran-contenu">
+        <span class="ecran-marque">VEILLE</span>
+        <span class="ecran-ligne">Session de nuit · Veldmoor</span>
+        <span class="ecran-invite">Cliquer pour se connecter</span>
+      </span>
+    </button>
+  </div>
+  <p class="scene-aide">Clique sur l'écran</p>
+</div>
+
+<div id="ordinateur" class="ordinateur" hidden>
 <header class="bandeau">
   <span>VELDMOOR <i>/</i> VEILLE DE NUIT<span id="identite" class="identite"></span></span>
   <span id="chrono" class="chrono" hidden>03:00</span>
@@ -125,6 +140,7 @@
     <button id="rejouer" class="bouton-signal">Numéro suivant</button>
   </section>
 </main>
+</div>
 <script src="app.js"></script>
 </body>
 </html>

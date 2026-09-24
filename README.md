@@ -1,4 +1,4 @@
-# The Number
+# Le Numéro
 
 A number comes up. Someone in the city will be part of a serious incident tonight,
 as the victim or as the culprit. You have three minutes to find out which.
@@ -30,6 +30,10 @@ Then open http://127.0.0.1:8420. Live mode needs a Nebius API key in
 `NEBIUS_API_KEY` or `~/.config/jeu-enquete/nebius.env`. Nothing but the Python
 standard library is required.
 
+## Credits
+
+Desk photo by Ruijia Wang on Unsplash (Unsplash License).
+
 ## Licence
 
-All rights reserved. The code is public to be read, not reused. See `LICENSE`.
+All rights reserved. The code is public to be read, not reused. See `LICENSE`. The desk photo keeps its own Unsplash License.

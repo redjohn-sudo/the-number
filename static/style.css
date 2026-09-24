@@ -161,3 +161,37 @@ button:disabled { opacity: .4; cursor: wait; }
   .chiffres { grid-template-columns: 1fr 1fr; row-gap: 20px; }
   .identite { display: none; }
 }
+
+/* Scène d'ouverture : le bureau, puis le zoom sur l'écran.
+   Écran mesuré dans la photo (2400 × 945) : x 908 à 1492, y 188 à 518. */
+.scene { position: fixed; inset: 0; overflow: hidden; background: #04060a; z-index: 10;
+  transition: opacity .35s ease .95s; }
+.scene.entree { opacity: 0; pointer-events: none; }
+.scene-image { position: absolute; left: 50%; top: 50%; width: max(100vw, calc(100vh * 2400 / 945));
+  aspect-ratio: 2400 / 945; transform: translate(-50%, -50%); transform-origin: 50% 37.35%;
+  transition: transform 1.2s cubic-bezier(.65, 0, .2, 1); }
+.scene-image img { display: block; width: 100%; height: 100%; }
+.ecran-bureau { position: absolute; left: 37.83%; top: 19.89%; width: 24.33%; height: 34.92%;
+  padding: 0; border: 0; cursor: pointer; background: #0c0d0f; container-type: inline-size;
+  box-shadow: 0 0 80px 10px rgba(110, 150, 230, .18); overflow: hidden; }
+.ecran-bureau:hover { background: #0c0d0f; box-shadow: 0 0 90px 16px rgba(255, 138, 31, .22); }
+.ecran-contenu { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
+  padding: 0 9cqw; text-align: left; color: var(--papier); animation: allumage 3s ease-in-out infinite; }
+.ecran-marque { font: 400 12cqw/1 var(--serif); letter-spacing: .02em; }
+.ecran-ligne { font: 500 2.6cqw/1.6 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gris); margin-top: 3cqw; }
+.ecran-invite { font: 500 2.6cqw/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--signal); margin-top: 7cqw; }
+@keyframes allumage { 0%, 100% { opacity: 1; } 50% { opacity: .82; } }
+.scene-aide { position: absolute; left: 0; right: 0; bottom: 6vh; margin: 0; text-align: center;
+  font: 500 11px/1 var(--mono); letter-spacing: .3em; text-transform: uppercase; color: rgba(233, 229, 218, .55);
+  transition: opacity .3s; }
+.scene.entree .scene-aide { opacity: 0; }
+.ordinateur { animation: ecran-on .5s ease-out both; }
+@keyframes ecran-on { from { opacity: 0; filter: brightness(1.8); } to { opacity: 1; filter: none; } }
+@media (prefers-reduced-motion: reduce) { .scene-image, .scene { transition: none; } }
+/* Téléphone en portrait : l'écran de la photo doit tenir en entier (90 % de la largeur). */
+@media (max-aspect-ratio: 1/1) {
+  .scene-image { width: calc(90vw / .2433); }
+  .scene { background: #04060a; }
+  .scene-image img { -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent); }
+}

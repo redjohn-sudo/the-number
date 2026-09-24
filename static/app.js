@@ -256,6 +256,19 @@ async function trancher(verdict) {
   afficher("fin");
 }
 
+// Le bureau : un clic sur l'écran zoome jusqu'à le remplir, puis on passe dedans.
+function entrer() {
+  const scene = $("scene"), image = $("scene-image"), ecran = $("ecran-bureau").getBoundingClientRect();
+  if (scene.classList.contains("entree")) return;
+  const echelle = Math.max(innerWidth / ecran.width, innerHeight / ecran.height);
+  const dx = innerWidth / 2 - (ecran.left + ecran.width / 2), dy = innerHeight / 2 - (ecran.top + ecran.height / 2);
+  image.style.transform = `translate(-50%, -50%) translate(${dx}px, ${dy}px) scale(${echelle})`;
+  scene.classList.add("entree");
+  setTimeout(() => { $("ordinateur").hidden = false; }, 1150);
+  setTimeout(() => { scene.hidden = true; }, 1400);
+}
+$("ecran-bureau").onclick = entrer;
+
 $("numero-accueil").textContent = numeroAleatoire();
 $("form-profil").onsubmit = enregistrerProfil;
 $("changer").onclick = () => { $("nom-code").value = sauvegarde.profil.nom; afficher("profil"); };
