@@ -1,0 +1,6 @@
+# Jamais de clé ni de secret dans le dépôt
+.env
+*.env
+__pycache__/
+*.pyc
+parties/

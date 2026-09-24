@@ -1,0 +1,33 @@
+{
+  "truth": {
+    "verdict": "victim",
+    "what_happens": "Tonight at 23:30 Nora Vale will be pushed from the loading dock of the Kestrel print shop by her business partner, Elias Brandt.",
+    "why": "Nora found out Elias has been moving money out of their shop account and planned to take it to the bank manager tomorrow morning."
+  },
+  "person": {"name": "Nora Vale", "age": 41, "job": "co-owner of a print shop", "district": "Old Harbour, Veldmoor"},
+  "clues": [
+    {"id": "c1", "type": "banque", "time": "09:12", "text": "Kestrel Print Ltd: transfer of 4,800 to account ending 7731. Reference: 'supplies'. Third one this month.", "decisive": true},
+    {"id": "c2", "type": "mail", "time": "11:40", "text": "From Nora to the bank: 'Can we meet tomorrow at 9? I think someone is emptying our business account.'", "decisive": true},
+    {"id": "c3", "type": "sms", "time": "14:05", "text": "Elias to Nora: 'Heard you called the bank. Let's talk tonight at the shop, just us. 23:15?'", "decisive": false},
+    {"id": "c4", "type": "banque", "time": "15:30", "text": "Nora Vale personal card: 60 at Harbour Hardware. Items: rope, heavy-duty tape.", "decisive": false},
+    {"id": "c5", "type": "appel", "time": "18:02", "text": "Nora called Mara Quill (sister). 14 minutes.", "decisive": false},
+    {"id": "c6", "type": "camera", "time": "22:48", "text": "Street camera, Dock Lane: a man in a grey work jacket enters the Kestrel back yard. Face hidden.", "decisive": false},
+    {"id": "c7", "type": "position", "time": "23:05", "text": "Elias Brandt's phone was switched off at 22:41, last located 200 m from Kestrel Print.", "decisive": true},
+    {"id": "c8", "type": "sms", "time": "21:10", "text": "Tomas Reyd to Nora: 'You didn't hear it from me, but he's been asking who has keys to the dock.'", "decisive": false}
+  ],
+  "people": [
+    {"id": "p1", "name": "Elias Brandt", "relation": "business partner",
+     "knows": "Everything about the transfers. He set up the meeting tonight.",
+     "secret": "He moved 14,000 out of the shop to pay a gambling debt.",
+     "lie": {"says": "I was at home all evening, my phone died around 22:30.", "contradicted_by": ["c7"]}},
+    {"id": "p2", "name": "Mara Quill", "relation": "sister",
+     "knows": "Nora told her on the phone she was scared of 'a conversation at the shop tonight'.",
+     "secret": "She borrowed money from Nora last year and never paid it back, so she avoids talking about money.",
+     "lie": null},
+    {"id": "p3", "name": "Tomas Reyd", "relation": "print shop employee",
+     "knows": "Elias asked him twice this week who holds the keys to the loading dock.",
+     "secret": "He bought the rope and tape for Nora, who wanted to secure boxes on the dock; he used her card.",
+     "lie": {"says": "I haven't bought anything for the shop this week.", "contradicted_by": ["c4"]}}
+  ],
+  "explanation": "The rope and tape (c4) look like Nora is planning something, but Tomas bought them for the shop. The real signal is the money: repeated transfers (c1), Nora warning the bank (c2) and Elias turning his phone off near the shop before the meeting (c7). Nora is the victim."
+}

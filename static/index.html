@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Number</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <span class="marque">THE NUMBER</span>
+  <span id="chrono" hidden>03:00</span>
+</header>
+
+<main>
+  <section id="accueil">
+    <p class="surtitre">Incoming</p>
+    <h1>A number just came up.</h1>
+    <p>Someone in this city will be part of a serious incident tonight. Victim or culprit. You have three minutes, and every file you open costs them a little privacy.</p>
+    <button id="commencer">Open the case</button>
+    <p id="erreur" class="erreur" hidden></p>
+  </section>
+
+  <section id="partie" hidden>
+    <div class="cible">
+      <div class="cadre" aria-hidden="true"></div>
+      <div>
+        <p class="surtitre">Number</p>
+        <h2 id="nom"></h2>
+        <p id="details"></p>
+      </div>
+      <div class="jauge">
+        <span>Privacy</span>
+        <div class="piste"><div id="vie-privee"></div></div>
+      </div>
+    </div>
+
+    <div class="colonnes">
+      <div>
+        <h3>Their day</h3>
+        <ul id="indices"></ul>
+      </div>
+      <div>
+        <h3>People around them</h3>
+        <ul id="personnes"></ul>
+        <div id="appel" hidden>
+          <p class="surtitre">On the line: <span id="interlocuteur"></span></p>
+          <div id="fil"></div>
+          <form id="question">
+            <input id="texte" autocomplete="off" placeholder="Ask something…" required>
+            <button>Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <p>Your call.</p>
+      <button data-verdict="victim">Victim</button>
+      <button data-verdict="culprit">Culprit</button>
+    </div>
+  </section>
+
+  <section id="fin" hidden>
+    <p class="surtitre" id="resultat"></p>
+    <h2 id="verite"></h2>
+    <p id="pourquoi"></p>
+    <h3>What you should have seen</h3>
+    <ul id="decisifs"></ul>
+    <h3>Who lied</h3>
+    <ul id="menteurs"></ul>
+    <p id="score"></p>
+    <button id="rejouer">Next number</button>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
