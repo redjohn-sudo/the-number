@@ -17,14 +17,16 @@ MODELE = os.environ.get("ENQUETE_MODELE", "deepseek-ai/DeepSeek-V4.1-Flash")
 EXEMPLE = Path(__file__).parent / "exemples" / "enquete-1.json"
 TYPES_INDICES = {"sms", "mail", "banque", "camera", "appel", "position"}
 
-CONSIGNE_ENQUETE = """You write one case for a short investigation game set in a fictional city.
+CONSIGNE_ENQUETE = """You write one case, IN FRENCH, for a short investigation game set in a fictional French-speaking city.
 The player is an AI watching the city. A person's number comes up: in the next 24 hours
 this person will be involved in a serious incident, either as the VICTIM or as the CULPRIT.
 The player has three minutes to find out which.
 
 Write the TRUTH FIRST, then the evidence, then the people around the person.
 Rules:
+- All text values in natural French (keys and enum values stay in English as in the schema).
 - Fictional names and places only. No real brands, no real cities, no real public figures.
+- Write like a real phone or bank record, not like a novel. No em dashes.
 - No gore, no sexual content, no minors involved in the incident. Tone of a TV crime drama.
 - 6 to 8 clues. Types: sms, mail, banque (bank record), camera, appel (call log), position.
 - Each clue is a short realistic fragment (max 2 sentences) with a time (HH:MM).
@@ -45,7 +47,8 @@ SCHEMA = {
 
 CONSIGNE_PERSONNAGE = """You play {name}, {relation} of {person}, in an investigation game.
 An AI is questioning you through a phone line. Answer in 1 to 3 short sentences, in the
-player's language, like a real person: hesitant, defensive or warm depending on the question.
+player's language (French by default), like a real person: hesitant, defensive or warm
+depending on the question. No em dashes.
 What you know: {knows}
 Your secret, which you protect: {secret}
 {mensonge}

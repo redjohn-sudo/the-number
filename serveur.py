@@ -9,6 +9,7 @@ ne reçoit que ce qu'un joueur a le droit de voir.
 from __future__ import annotations
 
 import json
+import os
 import secrets
 import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -77,6 +78,6 @@ class Gestionnaire(SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    port = 8420
+    port = int(os.environ.get("PORT", "8420"))
     print(f"http://127.0.0.1:{port}  ({'hors ligne' if HORS_LIGNE else 'IA en direct'})")
     ThreadingHTTPServer(("127.0.0.1", port), Gestionnaire).serve_forever()

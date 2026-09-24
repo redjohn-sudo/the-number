@@ -1,76 +1,122 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Number</title>
+<title>Le Numéro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <span class="marque">THE NUMBER</span>
-  <span id="chrono" hidden>03:00</span>
+<header class="bandeau">
+  <span>VELDMOOR <i>/</i> VEILLE DE NUIT<span id="identite" class="identite"></span></span>
+  <span id="chrono" class="chrono" hidden>03:00</span>
 </header>
 
 <main>
-  <section id="accueil">
-    <p class="surtitre">Incoming</p>
-    <h1>A number just came up.</h1>
-    <p>Someone in this city will be part of a serious incident tonight. Victim or culprit. You have three minutes, and every file you open costs them a little privacy.</p>
-    <button id="commencer">Open the case</button>
+  <section id="profil" class="accueil" hidden>
+    <p class="etiquette">Nouvelle affectation</p>
+    <h1>Qui veille<br>cette nuit&nbsp;?</h1>
+    <form id="form-profil" class="form-profil">
+      <label class="etiquette" for="nom-code">Nom de code</label>
+      <input id="nom-code" maxlength="24" autocomplete="off" required placeholder="Ex. Corbeau">
+      <fieldset>
+        <legend class="etiquette">Tu es</legend>
+        <label><input type="radio" name="genre" value="m" required> Opérateur</label>
+        <label><input type="radio" name="genre" value="f"> Opératrice</label>
+        <label><input type="radio" name="genre" value="n"> Neutre</label>
+      </fieldset>
+      <button class="bouton-signal">Prendre le poste</button>
+    </form>
+  </section>
+
+  <section id="accueil" class="accueil">
+    <p id="bienvenue" class="bienvenue"></p>
+    <p class="etiquette">Signal entrant <span id="numero-accueil" class="numero"></span></p>
+    <h1>Un numéro<br>vient de tomber.</h1>
+    <p class="chapeau">Cette nuit, quelqu'un dans cette ville sera mêlé à un drame. Victime ou coupable&nbsp;? Tu as trois minutes. Chaque fichier que tu ouvres lui coûte un peu de sa vie privée.</p>
+    <button id="commencer" class="bouton-signal">Ouvrir le dossier</button>
+    <p id="attente" class="attente" hidden>Recoupement des flux de la ville<span class="points"></span></p>
     <p id="erreur" class="erreur" hidden></p>
+
+    <div id="dossier" class="dossier" hidden>
+      <p class="etiquette">Ton dossier <button id="changer" class="lien">Changer d'identité</button></p>
+      <div class="chiffres">
+        <div><b id="st-resolues">0</b><span>Résolues</span></div>
+        <div><b id="st-ratees">0</b><span>Ratées</span></div>
+        <div><b id="st-serie">0</b><span>Série en cours</span></div>
+        <div><b id="st-record">0</b><span>Meilleur score</span></div>
+      </div>
+      <div class="ratio">
+        <p class="etiquette">Taux de réussite <b id="st-ratio">0 %</b></p>
+        <div class="piste-ratio"><div id="jauge-ratio"></div></div>
+      </div>
+      <ol id="historique" class="historique"></ol>
+    </div>
   </section>
 
   <section id="partie" hidden>
-    <div class="cible">
-      <div class="cadre" aria-hidden="true"></div>
+    <div class="sujet">
       <div>
-        <p class="surtitre">Number</p>
-        <h2 id="nom"></h2>
-        <p id="details"></p>
+        <p class="etiquette">Sujet <span id="numero" class="numero"></span></p>
+        <h2 id="nom" class="nom"></h2>
+        <p id="details" class="details"></p>
       </div>
-      <div class="jauge">
-        <span>Privacy</span>
-        <div class="piste"><div id="vie-privee"></div></div>
+      <div class="exposition">
+        <p class="etiquette">Vie privée <b id="pourcentage">100 %</b></p>
+        <div id="segments" class="segments"></div>
       </div>
     </div>
 
-    <div class="colonnes">
-      <div>
-        <h3>Their day</h3>
-        <ul id="indices"></ul>
+    <div class="bloc">
+      <p class="etiquette">Sa journée <span class="aide">Clique un repère pour ouvrir le fichier</span></p>
+      <div id="frise" class="frise"></div>
+    </div>
+
+    <div class="grille">
+      <div class="bloc">
+        <p class="etiquette">Fichiers ouverts</p>
+        <ol id="journal" class="journal"><li class="vide">Aucun fichier ouvert.</li></ol>
       </div>
-      <div>
-        <h3>People around them</h3>
-        <ul id="personnes"></ul>
-        <div id="appel" hidden>
-          <p class="surtitre">On the line: <span id="interlocuteur"></span></p>
-          <div id="fil"></div>
-          <form id="question">
-            <input id="texte" autocomplete="off" placeholder="Ask something…" required>
-            <button>Send</button>
+      <div class="bloc">
+        <p class="etiquette">Son entourage</p>
+        <ul id="personnes" class="personnes"></ul>
+        <div id="appel" class="ecoute" hidden>
+          <p class="etiquette">Ligne ouverte <span id="interlocuteur"></span></p>
+          <div id="fil" class="fil"></div>
+          <form id="question" class="question">
+            <input id="texte" autocomplete="off" placeholder="Pose ta question…" required>
+            <button>Envoyer</button>
           </form>
         </div>
       </div>
     </div>
 
     <div class="verdict">
-      <p>Your call.</p>
-      <button data-verdict="victim">Victim</button>
-      <button data-verdict="culprit">Culprit</button>
+      <p class="etiquette">Ton verdict</p>
+      <button data-verdict="victim">Victime</button>
+      <button data-verdict="culprit">Coupable</button>
     </div>
   </section>
 
-  <section id="fin" hidden>
-    <p class="surtitre" id="resultat"></p>
-    <h2 id="verite"></h2>
-    <p id="pourquoi"></p>
-    <h3>What you should have seen</h3>
-    <ul id="decisifs"></ul>
-    <h3>Who lied</h3>
-    <ul id="menteurs"></ul>
-    <p id="score"></p>
-    <button id="rejouer">Next number</button>
+  <section id="fin" class="rapport" hidden>
+    <p class="etiquette">Rapport <span id="resultat" class="tampon"></span></p>
+    <h2 id="verite" class="nom"></h2>
+    <p id="pourquoi" class="chapeau"></p>
+    <div class="grille">
+      <div class="bloc">
+        <p class="etiquette">Ce qu'il fallait voir</p>
+        <ul id="decisifs" class="journal"></ul>
+      </div>
+      <div class="bloc">
+        <p class="etiquette">Qui a menti</p>
+        <ul id="menteurs" class="journal"></ul>
+      </div>
+    </div>
+    <p id="score" class="score"></p>
+    <button id="rejouer" class="bouton-signal">Numéro suivant</button>
   </section>
 </main>
 <script src="app.js"></script>
