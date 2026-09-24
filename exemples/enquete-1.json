@@ -4,30 +4,111 @@
     "what_happens": "Ce soir à 23 h 30, Nora Valès sera poussée du quai de chargement de l'imprimerie Kestrel par son associé, Élias Brandt.",
     "why": "Nora a découvert qu'Élias vide le compte de l'imprimerie et comptait prévenir la banque demain matin."
   },
-  "person": {"name": "Nora Valès", "age": 41, "job": "co-gérante d'une imprimerie", "district": "Vieux-Port, Veldmoor"},
+  "threat": {
+    "kind": "Agression grave",
+    "place": "Imprimerie Kestrel, allée des Docks",
+    "window": "23:00-00:00",
+    "briefing": "Une personne risque de chuter ou d'être poussée depuis le quai de chargement de l'imprimerie Kestrel, entre 23 h et minuit. Le sujet sera sur place."
+  },
+  "person": {
+    "name": "Nora Valès",
+    "age": 41,
+    "job": "co-gérante d'une imprimerie",
+    "district": "Vieux-Port, Veldmoor"
+  },
   "clues": [
-    {"id": "c1", "type": "banque", "time": "09:12", "text": "Imprimerie Kestrel : virement de 4 800 € vers un compte finissant par 7731. Motif : « fournitures ». Troisième ce mois-ci.", "decisive": true},
-    {"id": "c2", "type": "mail", "time": "11:40", "text": "De Nora à sa banque : « Pouvons-nous nous voir demain à 9 h ? Je crois que quelqu'un vide notre compte professionnel. »", "decisive": true},
-    {"id": "c3", "type": "sms", "time": "14:05", "text": "Élias à Nora : « Tu as appelé la banque, paraît-il. On en parle ce soir à l'atelier, juste nous deux. 23 h 15 ? »", "decisive": false},
-    {"id": "c4", "type": "banque", "time": "15:30", "text": "Carte personnelle de Nora Valès : 60 € à la Quincaillerie du Port. Articles : corde, ruban adhésif renforcé.", "decisive": false},
-    {"id": "c5", "type": "appel", "time": "18:02", "text": "Nora appelle Mara Quilly (sœur). Durée : 14 minutes.", "decisive": false},
-    {"id": "c8", "type": "sms", "time": "21:10", "text": "Tomas Reyd à Nora : « Je ne t'ai rien dit, mais il demande qui a les clés du quai. »", "decisive": false},
-    {"id": "c6", "type": "camera", "time": "22:48", "text": "Caméra de rue, allée des Docks : un homme en veste de travail grise entre dans la cour de Kestrel. Visage caché.", "decisive": false},
-    {"id": "c7", "type": "position", "time": "23:05", "text": "Le téléphone d'Élias Brandt est éteint depuis 22 h 41. Dernière position : à 200 m de l'imprimerie Kestrel.", "decisive": true}
+    {
+      "id": "c1",
+      "type": "banque",
+      "time": "09:12",
+      "text": "Imprimerie Kestrel : virement de 4 800 € vers un compte finissant par 7731. Motif : « fournitures ». Troisième ce mois-ci.",
+      "decisive": true
+    },
+    {
+      "id": "c2",
+      "type": "mail",
+      "time": "11:40",
+      "text": "De Nora à sa banque : « Pouvons-nous nous voir demain à 9 h ? Je crois que quelqu'un vide notre compte professionnel. »",
+      "decisive": true
+    },
+    {
+      "id": "c3",
+      "type": "sms",
+      "time": "14:05",
+      "text": "Élias à Nora : « Tu as appelé la banque, paraît-il. On en parle ce soir à l'atelier, juste nous deux. 23 h 15 ? »",
+      "decisive": false
+    },
+    {
+      "id": "c4",
+      "type": "banque",
+      "time": "15:30",
+      "text": "Carte personnelle de Nora Valès : 60 € à la Quincaillerie du Port. Articles : corde, ruban adhésif renforcé.",
+      "decisive": false
+    },
+    {
+      "id": "c5",
+      "type": "appel",
+      "time": "18:02",
+      "text": "Nora appelle Mara Quilly (sœur). Durée : 14 minutes.",
+      "decisive": false
+    },
+    {
+      "id": "c8",
+      "type": "sms",
+      "time": "21:10",
+      "text": "Tomas Reyd à Nora : « Je ne t'ai rien dit, mais il demande qui a les clés du quai. »",
+      "decisive": false
+    },
+    {
+      "id": "c6",
+      "type": "camera",
+      "time": "22:48",
+      "text": "Caméra de rue, allée des Docks : un homme en veste de travail grise entre dans la cour de Kestrel. Visage caché.",
+      "decisive": false
+    },
+    {
+      "id": "c7",
+      "type": "position",
+      "time": "23:05",
+      "text": "Le téléphone d'Élias Brandt est éteint depuis 22 h 41. Dernière position : à 200 m de l'imprimerie Kestrel.",
+      "decisive": true
+    }
   ],
   "people": [
-    {"id": "p1", "name": "Élias Brandt", "relation": "associé",
-     "knows": "Tout sur les virements. C'est lui qui a fixé le rendez-vous de ce soir.",
-     "secret": "Il a sorti 14 000 € de l'imprimerie pour payer une dette de jeu.",
-     "lie": {"says": "J'étais chez moi toute la soirée, mon téléphone s'est déchargé vers 22 h 30.", "contradicted_by": ["c7"]}},
-    {"id": "p2", "name": "Mara Quilly", "relation": "sœur",
-     "knows": "Au téléphone, Nora lui a dit qu'elle redoutait « une discussion à l'atelier ce soir ».",
-     "secret": "Elle a emprunté de l'argent à Nora l'an dernier sans le rendre, alors elle évite de parler d'argent.",
-     "lie": null},
-    {"id": "p3", "name": "Tomas Reyd", "relation": "employé de l'imprimerie",
-     "knows": "Élias lui a demandé deux fois cette semaine qui avait les clés du quai de chargement.",
-     "secret": "C'est lui qui a acheté la corde et le ruban, pour arrimer des cartons sur le quai, avec la carte de Nora.",
-     "lie": {"says": "Je n'ai rien acheté pour l'atelier cette semaine.", "contradicted_by": ["c4"]}}
+    {
+      "id": "p1",
+      "name": "Élias Brandt",
+      "relation": "associé",
+      "knows": "Tout sur les virements. C'est lui qui a fixé le rendez-vous de ce soir.",
+      "secret": "Il a sorti 14 000 € de l'imprimerie pour payer une dette de jeu.",
+      "lie": {
+        "says": "J'étais chez moi toute la soirée, mon téléphone s'est déchargé vers 22 h 30.",
+        "contradicted_by": [
+          "c7"
+        ]
+      }
+    },
+    {
+      "id": "p2",
+      "name": "Mara Quilly",
+      "relation": "sœur",
+      "knows": "Au téléphone, Nora lui a dit qu'elle redoutait « une discussion à l'atelier ce soir ».",
+      "secret": "Elle a emprunté de l'argent à Nora l'an dernier sans le rendre, alors elle évite de parler d'argent.",
+      "lie": null
+    },
+    {
+      "id": "p3",
+      "name": "Tomas Reyd",
+      "relation": "employé de l'imprimerie",
+      "knows": "Élias lui a demandé deux fois cette semaine qui avait les clés du quai de chargement.",
+      "secret": "C'est lui qui a acheté la corde et le ruban, pour arrimer des cartons sur le quai, avec la carte de Nora.",
+      "lie": {
+        "says": "Je n'ai rien acheté pour l'atelier cette semaine.",
+        "contradicted_by": [
+          "c4"
+        ]
+      }
+    }
   ],
   "explanation": "La corde et le ruban (15 h 30) font croire que Nora prépare quelque chose, mais c'est Tomas qui les a achetés pour l'atelier. Le vrai signal, c'est l'argent : des virements répétés, Nora qui alerte sa banque, et Élias qui éteint son téléphone près de l'atelier juste avant le rendez-vous. Nora est la victime."
 }

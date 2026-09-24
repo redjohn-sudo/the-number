@@ -101,6 +101,9 @@ async function commencer() {
   $("numero").textContent = numeroAleatoire();
   $("nom").textContent = partie.person.name;
   $("details").textContent = `${partie.person.age} ans · ${partie.person.job} · ${partie.person.district}`;
+  $("menace-type").textContent = partie.threat.kind;
+  $("menace-texte").textContent = partie.threat.briefing;
+  $("menace-lieu").textContent = `${partie.threat.place} · ${partie.threat.window.split("-").map(heureLisible).join(" à ")}`;
   dessinerFrise(); dessinerJournal(); dessinerPersonnes(); majExposition();
   $("appel").hidden = true;
   afficher("partie");
@@ -119,6 +122,13 @@ function dessinerFrise() {
       const zone = el("div", undefined, "nuit-zone");
       zone.style.left = (debut / 24) * 100 + "%"; zone.style.width = ((fin - debut) / 24) * 100 + "%";
       couloir.append(zone);
+    }
+    const [debutMenace, finMenace] = partie.threat.window.split("-").map(heureEnMinutes);
+    if (!Number.isNaN(debutMenace) && !Number.isNaN(finMenace)) {
+      const fenetre = el("div", undefined, "fenetre");
+      const fin = finMenace > debutMenace ? finMenace : 1440;
+      fenetre.style.left = (debutMenace / 1440) * 100 + "%"; fenetre.style.width = ((fin - debutMenace) / 1440) * 100 + "%";
+      couloir.append(fenetre);
     }
     for (const indice of indices) {
       const repere = el("button", undefined, "repere");

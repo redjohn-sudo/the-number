@@ -86,6 +86,13 @@ button:disabled { opacity: .4; cursor: wait; }
 .segments span { height: 10px; background: var(--papier); transition: background .3s; }
 .segments span.perdu { background: var(--filet); }
 
+.menace { padding: 24px 0 24px 18px; margin-top: 28px; border-left: 2px solid var(--alerte); }
+.menace .etiquette { margin-bottom: 8px; }
+.menace .numero { color: var(--alerte); }
+.menace-texte { font: 400 clamp(22px, 2.6vw, 28px)/1.25 var(--serif); margin: 0; max-width: 46ch; }
+.menace .details { margin-top: 10px; }
+.frise .fenetre { position: absolute; top: 0; bottom: 0; background: rgba(255, 77, 61, .14);
+  border-left: 1px solid var(--alerte); border-right: 1px solid var(--alerte); pointer-events: none; }
 .bloc { padding: 28px 0; border-bottom: 1px solid var(--filet); }
 
 /* Frise de 24 heures, une ligne par type de fichier */

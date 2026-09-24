@@ -22,7 +22,9 @@ The player is an AI watching the city. A person's number comes up: in the next 2
 this person will be involved in a serious incident, either as the VICTIM or as the CULPRIT.
 The player has three minutes to find out which.
 
-Write the TRUTH FIRST, then the evidence, then the people around the person.
+Write the TRUTH FIRST, then the THREAT the player is shown, then the evidence, then the people.
+The threat tells what kind of crime, where and when. It must never reveal, even indirectly,
+whether the person is the victim or the culprit.
 Rules:
 - All text values in natural French (keys and enum values stay in English as in the schema).
 - Fictional names and places only. No real brands, no real cities, no real public figures.
@@ -38,6 +40,8 @@ Rules:
 
 SCHEMA = {
     "truth": {"verdict": "victim|culprit", "what_happens": "", "why": ""},
+    "threat": {"kind": "short crime type, e.g. agression grave", "place": "", "window": "HH:MM-HH:MM",
+               "briefing": "one sentence for the player: what may happen, where, when, WITHOUT saying if the person is victim or culprit"},
     "person": {"name": "", "age": 0, "job": "", "district": ""},
     "clues": [{"id": "c1", "type": "sms", "time": "HH:MM", "text": "", "decisive": False}],
     "people": [{"id": "p1", "name": "", "relation": "", "knows": "", "secret": "",
@@ -91,6 +95,10 @@ def valider(enquete: dict) -> list[str]:
     verite = enquete.get("truth") or {}
     if verite.get("verdict") not in ("victim", "culprit"):
         problemes.append("verdict absent ou différent de victim/culprit")
+    menace = enquete.get("threat") or {}
+    for champ in ("kind", "place", "window", "briefing"):
+        if not str(menace.get(champ, "")).strip():
+            problemes.append(f"menace incomplète : {champ} manquant")
     indices = enquete.get("clues") or []
     ids = [c.get("id") for c in indices]
     if not 6 <= len(indices) <= 8:
@@ -151,6 +159,7 @@ def version_joueur(enquete: dict) -> dict:
     """Ce que le navigateur reçoit : ni la vérité, ni les secrets, ni les mensonges."""
     return {
         "person": enquete["person"],
+        "threat": {k: enquete["threat"][k] for k in ("kind", "place", "window", "briefing")},
         "clues": sorted(({k: c[k] for k in ("id", "type", "time", "text")} for c in enquete["clues"]),
                         key=lambda c: c["time"]),
         "people": [{k: p[k] for k in ("id", "name", "relation")} for p in enquete["people"]],
