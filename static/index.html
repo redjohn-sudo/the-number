@@ -6,7 +6,7 @@
 <title>Le Numéro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,8 +15,7 @@
     <img src="img/bureau.jpg" alt="Un bureau plongé dans la nuit, un seul écran allumé.">
     <button id="ecran-bureau" class="ecran-bureau" aria-label="S'asseoir devant l'ordinateur">
       <span class="ecran-contenu">
-        <span class="ecran-marque">VEILLE</span>
-        <span class="ecran-ligne">Session de nuit · Veldmoor</span>
+        <span class="ecran-heure" id="ecran-heure">23:04</span>
         <span class="ecran-invite">Cliquer pour se connecter</span>
       </span>
     </button>
@@ -24,123 +23,51 @@
   <p class="scene-aide">Clique sur l'écran</p>
 </div>
 
-<div id="ordinateur" class="ordinateur" hidden>
-<header class="bandeau">
-  <span>VELDMOOR <i>/</i> VEILLE DE NUIT<span id="identite" class="identite"></span></span>
-  <span id="chrono" class="chrono" hidden>03:00</span>
-</header>
+<div id="os" class="os" hidden>
+  <svg id="carte" class="carte" aria-hidden="true"></svg>
 
-<main>
-  <section id="profil" class="accueil" hidden>
-    <p class="etiquette">Nouvelle affectation</p>
-    <h1>Qui veille<br>cette nuit&nbsp;?</h1>
-    <form id="form-profil" class="form-profil">
-      <label class="etiquette" for="nom-code">Nom de code</label>
-      <input id="nom-code" maxlength="24" autocomplete="off" required placeholder="Ex. Corbeau">
-      <fieldset>
-        <legend class="etiquette">Tu es</legend>
-        <label><input type="radio" name="genre" value="m" required> Opérateur</label>
-        <label><input type="radio" name="genre" value="f"> Opératrice</label>
-        <label><input type="radio" name="genre" value="n"> Neutre</label>
-      </fieldset>
-      <button class="bouton-signal">Prendre le poste</button>
-    </form>
-  </section>
+  <div class="barre-menu">
+    <span class="logo">Veille</span>
+    <span id="app-active" class="app-active">Bureau</span>
+    <span class="menu-droite">
+      <span id="m-vie" class="m-vie" hidden><span class="m-vie-piste"><span id="m-vie-jauge"></span></span><span id="m-vie-texte">100 %</span></span>
+      <span id="m-chrono" class="m-chrono" hidden>03:00</span>
+      <span id="m-operateur" class="m-operateur"></span>
+    </span>
+  </div>
 
-  <section id="accueil" class="accueil">
-    <p id="bienvenue" class="bienvenue"></p>
-    <p class="etiquette">Signal entrant <span id="numero-accueil" class="numero"></span></p>
-    <h1>Un numéro<br>vient de tomber.</h1>
-    <p class="chapeau">Cette nuit, quelqu'un dans cette ville sera mêlé à un drame. Victime ou coupable&nbsp;? Tu as trois minutes. Chaque fichier que tu ouvres lui coûte un peu de sa vie privée.</p>
-    <button id="commencer" class="bouton-signal">Ouvrir le dossier</button>
-    <p id="attente" class="attente" hidden>Recoupement des flux de la ville<span class="points"></span></p>
-    <p id="erreur" class="erreur" hidden></p>
+  <div id="bureau" class="bureau"></div>
 
-    <div id="dossier" class="dossier" hidden>
-      <p class="etiquette">Ton dossier <button id="changer" class="lien">Changer d'identité</button></p>
-      <div class="chiffres">
-        <div><b id="st-resolues">0</b><span>Résolues</span></div>
-        <div><b id="st-ratees">0</b><span>Ratées</span></div>
-        <div><b id="st-serie">0</b><span>Série en cours</span></div>
-        <div><b id="st-record">0</b><span>Meilleur score</span></div>
-      </div>
-      <div class="ratio">
-        <p class="etiquette">Taux de réussite <b id="st-ratio">0 %</b></p>
-        <div class="piste-ratio"><div id="jauge-ratio"></div></div>
-      </div>
-      <ol id="historique" class="historique"></ol>
-    </div>
-  </section>
+  <nav id="dock" class="dock" hidden>
+    <button data-app="dossier"><span class="icone" data-icone="dossier"></span><span>Dossier</span></button>
+    <button data-app="fichiers"><span class="icone" data-icone="fichiers"></span><span>Fichiers</span></button>
+    <button data-app="ecoute"><span class="icone" data-icone="ecoute"></span><span>Écoute</span></button>
+    <button data-app="verdict" class="dock-verdict"><span class="icone" data-icone="verdict"></span><span>Trancher</span></button>
+  </nav>
 
-  <section id="partie" hidden>
-    <div class="sujet">
-      <div>
-        <p class="etiquette">Sujet <span id="numero" class="numero"></span></p>
-        <h2 id="nom" class="nom"></h2>
-        <p id="details" class="details"></p>
-      </div>
-      <div class="exposition">
-        <p class="etiquette">Vie privée <b id="pourcentage">100 %</b></p>
-        <div id="segments" class="segments"></div>
-      </div>
-    </div>
-
-    <div class="menace">
-      <p class="etiquette">Menace détectée <span id="menace-type" class="numero"></span></p>
-      <p id="menace-texte" class="menace-texte"></p>
-      <p id="menace-lieu" class="details"></p>
-    </div>
-
-    <div class="bloc">
-      <p class="etiquette">Sa journée <span class="aide">Clique un repère pour ouvrir le fichier</span></p>
-      <div id="frise" class="frise"></div>
-    </div>
-
-    <div class="grille">
-      <div class="bloc">
-        <p class="etiquette">Fichiers ouverts</p>
-        <ol id="journal" class="journal"><li class="vide">Aucun fichier ouvert.</li></ol>
-      </div>
-      <div class="bloc">
-        <p class="etiquette">Son entourage</p>
-        <ul id="personnes" class="personnes"></ul>
-        <div id="appel" class="ecoute" hidden>
-          <p class="etiquette">Ligne ouverte <span id="interlocuteur"></span></p>
-          <div id="fil" class="fil"></div>
-          <form id="question" class="question">
-            <input id="texte" autocomplete="off" placeholder="Pose ta question…" required>
-            <button>Envoyer</button>
-          </form>
+  <div id="verrou" class="verrou" hidden>
+    <div class="verrou-carte">
+      <p id="verrou-heure" class="verrou-heure"></p>
+      <div id="avatar" class="avatar">?</div>
+      <form id="form-profil" class="form-profil">
+        <h1 id="verrou-titre">Qui veille cette nuit&nbsp;?</h1>
+        <div id="champs-profil">
+          <label for="nom-code">Nom de code</label>
+          <input id="nom-code" maxlength="24" autocomplete="off" placeholder="Ex. Corbeau">
+          <div class="puces" role="radiogroup" aria-label="Tu es">
+            <label><input type="radio" name="genre" value="m"> Opérateur</label>
+            <label><input type="radio" name="genre" value="f"> Opératrice</label>
+            <label><input type="radio" name="genre" value="n"> Analyste</label>
+          </div>
         </div>
-      </div>
+        <button class="bouton principal">Se connecter</button>
+        <button type="button" id="changer" class="lien" hidden>Changer d'identité</button>
+        <p id="erreur-profil" class="erreur" hidden></p>
+      </form>
     </div>
-
-    <div class="verdict">
-      <p class="etiquette">Ton verdict</p>
-      <button data-verdict="victim">Victime</button>
-      <button data-verdict="culprit">Coupable</button>
-    </div>
-  </section>
-
-  <section id="fin" class="rapport" hidden>
-    <p class="etiquette">Rapport <span id="resultat" class="tampon"></span></p>
-    <h2 id="verite" class="nom"></h2>
-    <p id="pourquoi" class="chapeau"></p>
-    <div class="grille">
-      <div class="bloc">
-        <p class="etiquette">Ce qu'il fallait voir</p>
-        <ul id="decisifs" class="journal"></ul>
-      </div>
-      <div class="bloc">
-        <p class="etiquette">Qui a menti</p>
-        <ul id="menteurs" class="journal"></ul>
-      </div>
-    </div>
-    <p id="score" class="score"></p>
-    <button id="rejouer" class="bouton-signal">Numéro suivant</button>
-  </section>
-</main>
+  </div>
 </div>
+
 <script src="app.js"></script>
 </body>
 </html>
